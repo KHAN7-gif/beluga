@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beluga Elite Aquatic | WP Labuan</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --water: #00d2ff;
+            --deep: #00458b;
+            --water-grad: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+            --black: #020b16;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-hover: rgba(0, 210, 255, 0.08);
+        }
+
+        /* RESET & BASE */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        body { background: var(--black); color: #fff; overflow-x: hidden; line-height: 1.6; }
+        body::before { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at top right, #002d5a, transparent); z-index: -1; }
+
+        /* HEADER & FLOATING NAV */
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 3000; padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: linear-gradient(to bottom, rgba(2, 11, 22, 0.95), transparent);
+            backdrop-filter: blur(10px);
+        }
+        .brand { font-family: 'Oswald'; font-size: 1.6rem; color: #fff; text-decoration: none; letter-spacing: 2px; }
+        .brand span { color: var(--water); text-shadow: 0 0 15px rgba(0, 210, 255, 0.5); }
+
+        .nav-container { position: fixed; top: 85px; left: 50%; transform: translateX(-50%); z-index: 2500; width: 90%; max-width: 1100px; }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); border-radius: 100px; padding: 8px 15px;
+            display: flex; justify-content: space-between; align-items: center; overflow-x: auto; scrollbar-width: none;
+        }
+        .glass-nav::-webkit-scrollbar { display: none; }
+        .nav-link {
+            color: #aaa; text-decoration: none; font-size: 0.7rem; font-weight: 800; padding: 10px 18px;
+            border-radius: 50px; transition: 0.4s; white-space: nowrap; display: flex; align-items: center; gap: 8px;
+        }
+        .nav-link:hover { color: var(--water); background: rgba(0, 210, 255, 0.1); }
+        .nav-link.active { background: var(--water-grad); color: #fff; box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4); }
+
+        /* SECTIONS BASE */
+        section { padding: 120px 5% 60px; max-width: 1400px; margin: 0 auto; }
+        .sec-title { text-align: center; margin-bottom: 50px; }
+        .sec-title h2 { font-family: 'Oswald'; font-size: 2.5rem; letter-spacing: 3px; color: #fff; }
+        .sec-title div { width: 60px; height: 4px; background: var(--water-grad); margin: 15px auto; border-radius: 2px; }
+
+        /* HERO */
+        .hero {
+            height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center;
+            background: linear-gradient(rgba(2,11,22,0.3), rgba(2,11,22,0.8)), url('https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=1600');
+            background-size: cover; background-position: center;
+        }
+        .hero h1 { font-family: 'Oswald'; font-size: clamp(3rem, 10vw, 6rem); line-height: 0.9; margin-bottom: 20px; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .hero p { font-size: 1rem; color: var(--water); letter-spacing: 6px; font-weight: 600; text-transform: uppercase; }
+
+        /* GRIDS & CARDS */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .card { 
+            background: var(--glass); backdrop-filter: blur(15px); border-radius: 25px; border: 1px solid var(--glass-border);
+            overflow: hidden; transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .card:hover { transform: translateY(-12px); border-color: var(--water); background: var(--glass-hover); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .card-img { width: 100%; height: 220px; object-fit: cover; opacity: 0.8; transition: 0.5s; }
+        .card:hover .card-img { opacity: 1; }
+
+        /* PACKAGE GLASS CARDS */
+        .price-card { padding: 50px 30px; text-align: center; position: relative; }
+        .price-card h3 { letter-spacing: 2px; font-size: 1.2rem; margin-bottom: 15px; }
+        .price-amount { font-family: 'Oswald'; font-size: 3.5rem; background: var(--water-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; }
+        .price-list { list-style: none; margin-bottom: 30px; color: #aaa; font-size: 0.85rem; line-height: 2.2; }
+        .price-list i { color: var(--water); margin-right: 8px; }
+        .btn-action { 
+            padding: 14px 30px; border-radius: 50px; background: var(--water-grad); color: #fff; 
+            text-decoration: none; font-weight: 800; font-size: 0.8rem; display: inline-block; transition: 0.3s;
+        }
+
+        /* VIDEO & GALLERY */
+        .vid-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
+        .vid-box { aspect-ratio: 9/16; background: #000; border-radius: 20px; overflow: hidden; border: 1px solid var(--glass-border); }
+        .vid-box video { width: 100%; height: 100%; object-fit: cover; }
+
+        /* COACHES & ATLET */
+        .coach-wrap { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-bottom: 60px; }
+        .coach-item { text-align: center; width: 250px; }
+        .coach-img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--water); margin-bottom: 15px; object-fit: cover; }
+
+        /* TESTIMONI */
+        .testi-card { padding: 30px; background: rgba(255,255,255,0.02); border-radius: 20px; border-left: 4px solid var(--water); font-style: italic; }
+
+        /* FOOTER & CONTACT */
+        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .map-container { border-radius: 30px; overflow: hidden; height: 450px; border: 1px solid var(--glass-border); }
+        .map-frame { width: 100%; height: 100%; border: none; filter: invert(90%) hue-rotate(180deg); }
+        
+        .form-glass { background: var(--glass); padding: 40px; border-radius: 30px; border: 1px solid var(--glass-border); }
+        .input-glass { width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 12px; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); color: #fff; }
+        
+        .floating-wa { 
+            position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #25d366; 
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
+            box-shadow: 0 10px 20px rgba(37,211,102,0.3); z-index: 9999; animation: pulse 2s infinite; color: #fff;
+        }
+
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+
+        @media (max-width: 768px) {
+            .nav-container { top: auto; bottom: 20px; width: 95%; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 3.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="brand">BELUGA<span>ELITE</span></a>
+        <div style="text-align: right;">
+            <p style="font-size: 0.5rem; letter-spacing: 2px; color: #666;">ACADEMY BY</p>
+            <p style="font-size: 0.8rem; font-weight: 800; color: var(--water);">COACH AADIAT</p>
+        </div>
+    </header>
+
+    <div class="nav-container">
+        <nav class="glass-nav">
+            <a href="#home" class="nav-link active"><i class="fas fa-home"></i> HOME</a>
+            <a href="#news" class="nav-link"><i class="fas fa-star"></i> NEWS</a>
+            <a href="#package" class="nav-link"><i class="fas fa-gem"></i> PAKEJ</a>
+            <a href="#squad" class="nav-link"><i class="fas fa-users"></i> SQUAD</a>
+            <a href="#testi" class="nav-link"><i class="fas fa-comment"></i> INFO</a>
+            <a href="#register" class="nav-link"><i class="fas fa-plus-circle"></i> JOIN</a>
+        </nav>
+    </div>
+
+    <a href="https://wa.me/60123456789" class="floating-wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <section id="home" class="hero" style="padding: 0;">
+        <div class="hero-content">
+            <p>Labuan's Gold Standard</p>
+            <h1>AADIAT <span style="color:var(--water)">AQUATIC</span></h1>
+            <div style="margin-top: 40px;">
+                <a href="#register" class="btn-action" style="padding: 18px 45px; font-size: 1rem;">DAFTAR SEKARANG</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="news">
+        <div class="sec-title"><h2>Berita Terkini</h2><div></div></div>
+        <div class="grid">
+            <script>
+                const news = ["Emas MSSM Labuan", "Teknik AI Strok", "Kem Latihan SUKMA", "Kelas Dewasa Dibuka"];
+                news.forEach((t, i) => {
+                    document.write(`
+                        <div class="card">
+                            <img src="https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=400&sig=${i}" class="card-img">
+                            <div style="padding: 20px;">
+                                <h4 style="color:var(--water); margin-bottom:10px;">${t}</h4>
+                                <p style="font-size:0.75rem; color:#aaa;">Laporan perkembangan atlet Beluga Elite di Pusat Akuatik Labuan.</p>
+                            </div>
+                        </div>
+                    `);
+                });
+            </script>
+        </div>
+    </section>
+
+    <section id="video">
+        <div class="sec-title"><h2>Latihan Pro</h2><div></div></div>
+        <div class="vid-grid">
+            <script>
+                for(let i=1; i<=7; i++) {
+                    document.write(`<div class="vid-box"><video muted loop onmouseover="this.play()" onmouseout="this.pause()" src="https://assets.mixkit.co/videos/preview/mixkit-athlete-swimming-in-the-pool-1550-large.mp4"></video></div>`);
+                }
+            </script>
+        </div>
+    </section>
+
+    <section id="package">
+        <div class="sec-title"><h2>Pakej Keahlian</h2><div></div></div>
+        <div class="grid">
+            <div class="card price-card">
+                <h3>BASIC AQUA</h3>
+                <div class="price-amount">RM180</div>
+                <ul class="price-list">
+                    <li><i class="fas fa-check"></i> 4 Sesi Sebulan</li>
+                    <li><i class="fas fa-check"></i> Keyakinan Air</li>
+                </ul>
+                <a href="#register" class="btn-action">PILIH</a>
+            </div>
+            <div class="card price-card" style="border-color: var(--water);">
+                <div style="background:var(--water-grad); font-size:0.6rem; padding:4px 15px; border-radius:50px; display:inline-block; margin-bottom:10px;">POPULAR</div>
+                <h3>PRO STROKE</h3>
+                <div class="price-amount">RM280</div>
+                <ul class="price-list">
+                    <li><i class="fas fa-check"></i> 8 Sesi Sebulan</li>
+                    <li><i class="fas fa-check"></i> Analisis Video</li>
+                </ul>
+                <a href="#register" class="btn-action">PILIH</a>
+            </div>
+            <div class="card price-card">
+                <h3>ELITE SQUAD</h3>
+                <div class="price-amount">RM450</div>
+                <ul class="price-list">
+                    <li><i class="fas fa-check"></i> Unlimited Sesi</li>
+                    <li><i class="fas fa-check"></i> Latihan Kejohanan</li>
+                </ul>
+                <a href="#register" class="btn-action">PILIH</a>
+            </div>
+            <div class="card price-card">
+                <h3>VIP PRIVATE</h3>
+                <div class="price-amount">RM800</div>
+                <ul class="price-list">
+                    <li><i class="fas fa-check"></i> 1-on-1 Personal</li>
+                    <li><i class="fas fa-check"></i> Masa Fleksibel</li>
+                </ul>
+                <a href="#register" class="btn-action">PILIH</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="squad">
+        <div class="sec-title"><h2>Barisan Jurulatih</h2><div></div></div>
+        <div class="coach-wrap">
+            <div class="coach-item"><img src="https://i.pravatar.cc/150?u=1" class="coach-img"><h4>Coach Aadiat</h4><p style="color:var(--water); font-size:0.8rem;">Head Coach</p></div>
+            <div class="coach-item"><img src="https://i.pravatar.cc/150?u=2" class="coach-img"><h4>Coach Sarah</h4><p style="color:var(--water); font-size:0.8rem;">Instructor</p></div>
+            <div class="coach-item"><img src="https://i.pravatar.cc/150?u=3" class="coach-img"><h4>Coach Rizal</h4><p style="color:var(--water); font-size:0.8rem;">Strength Coach</p></div>
+        </div>
+        <h3 style="text-align:center; margin-bottom:30px; font-family:'Oswald';">Elite Athletes (20)</h3>
+        <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap:15px;">
+            <script>
+                for(let i=1; i<=20; i++) {
+                    document.write(`<div class="card" style="text-align:center; padding:10px;"><img src="https://i.pravatar.cc/100?u=${i}" style="width:40px; height:40px; border-radius:50%; border:1px solid var(--water);"></div>`);
+                }
+            </script>
+        </div>
+    </section>
+
+    <section id="testi">
+        <div class="sec-title"><h2>Apa Kata Mereka?</h2><div></div></div>
+        <div class="grid">
+            <div class="testi-card"><p>"Coach Aadiat sangat sabar mendidik. Anak saya dari takut air, sekarang sudah mula menyertai pertandingan."</p><br><small>- Pn. Mariam, Labuan</small></div>
+            <div class="testi-card"><p>"Program latihan yang sistematik. Teknik renang anak saya bertambah baik dalam masa yang singkat."</p><br><small>- En. Zaki</small></div>
+        </div>
+    </section>
+
+    <section id="register">
+        <div class="footer-grid">
+            <div class="map-container">
+                <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.5866750334865!2d115.2285141!3d5.2750624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3216fc29497e6827%3A0x6e987c469b828945!2sLabuan%20Aquatic%20Centre!5e0!3m2!1sen!2smy!4v1700000000000"></iframe>
+            </div>
+            <div class="form-glass">
+                <h3 style="font-family:'Oswald'; margin-bottom:20px;">BORANG PENDAFTARAN</h3>
+                <input type="text" id="name" placeholder="Nama Pelajar" class="input-glass">
+                <input type="number" id="age" placeholder="Umur" class="input-glass">
+                <select id="plan" class="input-glass">
+                    <option value="Basic">Basic Aqua (RM180)</option>
+                    <option value="Pro">Pro Stroke (RM280)</option>
+                    <option value="Elite">Elite Squad (RM450)</option>
+                    <option value="VIP">VIP Private (RM800)</option>
+                </select>
+                <button onclick="sendToWA()" class="btn-action" style="width:100%; border:none; cursor:pointer;">
+                    <i class="fab fa-whatsapp"></i> HANTAR KE COACH
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align:center; padding:50px; color:#444; font-size:0.7rem; letter-spacing:2px;">
+        © 2026 BELUGA ELITE AQUATIC PERFORMANCE | WP LABUAN
+    </footer>
+
+    <script>
+        function sendToWA() {
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const plan = document.getElementById('plan').value;
+            const phone = "60123456789"; // GANTI NOMBOR COACH
+
+            if(!name || !age) { alert("Sila isi Nama dan Umur."); return; }
+
+            const text = `*PENDAFTARAN BELUGA ELITE*%0A%0ASalam Coach Aadiat, saya berminat mendaftar:%0A%0A*Nama:* ${name}%0A*Umur:* ${age}%0A*Pakej:* ${plan}`;
+            window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+        }
+
+        window.addEventListener('scroll', () => {
+            let current = "";
+            document.querySelectorAll("section").forEach(s => { if (pageYOffset >= s.offsetTop - 200) current = s.getAttribute("id"); });
+            document.querySelectorAll(".nav-link").forEach(a => {
+                a.classList.remove("active");
+                if (a.getAttribute("href").includes(current)) a.classList.add("active");
+            });
+        });
+    </script>
+</body>
+</html>
